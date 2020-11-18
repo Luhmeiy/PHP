@@ -1,11 +1,11 @@
 <?php
-session_start();
+	session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
 <head>
-	<title></title>
+	<title>Gerenciador Financeiro</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -20,11 +20,11 @@ session_start();
 <?php
 include "conecta.php";
 if (isset($_POST['numero'])){
-$sql = "INSERT INTO transacao (cd_transacao, vl_transacao, dt_transacao, st_transacao, id_forma, id_categoria, id_tb_usuario, descricao) VALUES (NULL, '".$_POST['numero']."','".$_POST['data']."','".$_POST['acao']."','".$_POST['forma']."','".$_POST['categoria']."', '".$_SESSION['COD_USER']."', '".$_POST['descricao']."')";
-if ($conn->query($sql) === TRUE) {
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+	$sql = "INSERT INTO transacao (cd_transacao, vl_transacao, dt_transacao, st_transacao, id_forma, id_categoria, id_tb_usuario, descricao) VALUES (NULL, '".$_POST['numero']."','".$_POST['data']."','".$_POST['acao']."','".$_POST['forma']."','".$_POST['categoria']."', '".$_SESSION['COD_USER']."', '".$_POST['descricao']."')";
+	if ($conn->query($sql) === TRUE) {
+	} else {
+    	echo "Error: " . $sql . "<br>" . $conn->error;
+	}
 }
 $conn->close();
 ?>
@@ -102,7 +102,6 @@ if ($result = $mysqli->query($query)) {
 </div>
 </div>
 </div>
-
 <style type="text/css">
 html{
 	font-family: Arial;
@@ -134,7 +133,6 @@ input[type=image]{
 .letra{
 	text-transform: capitalize;
 }
-<style type="text/css">
 .example{
 	background-color: #eee;
 	width: 200px;
@@ -145,7 +143,6 @@ input[type=image]{
 .example::-webkit-scrollbar{
     display: none;
 }
-</style>
 </style>
 </body>
 </html>

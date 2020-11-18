@@ -1,12 +1,12 @@
 <?php
-session_start();
-include "conecta.php";
+  session_start();
+  include "conecta.php";
 ?>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
 <head>
-	<title></title>
+    <title>Gerenciador Financeiro</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -25,175 +25,175 @@ include "conecta.php";
 <?php
 // Saúde
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '1' AND st_transacao = 'Depósito' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)){
-      while ($obj = $result->fetch_object()){
-echo "<div class='card bg-primary text-center border-success'>
-<div class='card-header border-success'>Saúde</div>
-".$obj->descricao."
-<div class='card-footer text-success border-success'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-success'>
-<button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)){
+    while ($obj = $result->fetch_object()){
+        echo "<div class='card bg-primary text-center border-success'>
+              <div class='card-header border-success'>Saúde</div>
+              ".$obj->descricao."
+              <div class='card-footer text-success border-success'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-success'>
+              <button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '1' AND st_transacao = 'Extração' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-primary text-center border-danger'>
-<div class='card-header border-danger'>Saúde</div>
-".$obj->descricao."
-<div class='card-footer text-danger border-danger'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-danger'>
-<button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+    echo "<div class='card bg-primary text-center border-danger'>
+          <div class='card-header border-danger'>Saúde</div>
+          ".$obj->descricao."
+          <div class='card-footer text-danger border-danger'>
+          ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+          </div>
+          <div class='card-footer border-danger'>
+          <button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>  
+          <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+          </div>
+          </div>
+          </div>";
 }
 }
 // Diversão
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '2' AND st_transacao = 'Depósito' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-warning text-center border-success'>
-<div class='card-header border-success'>Diversão</div>
-".$obj->descricao."
-<div class='card-footer text-success border-success'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-success'>
-<button class='btn btn-warning' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-warning text-center border-success'>
+              <div class='card-header border-success'>Diversão</div>
+              ".$obj->descricao."
+              <div class='card-footer text-success border-success'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-success'>
+              <button class='btn btn-warning' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '2' AND st_transacao = 'Extração' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-warning text-center border-danger'>
-<div class='card-header border-danger'>Diversão</div>
-".$obj->descricao."
-<div class='card-footer text-danger border-danger'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-danger'>
-<button class='btn btn-warning' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-warning text-center border-danger'>
+              <div class='card-header border-danger'>Diversão</div>
+              ".$obj->descricao."
+              <div class='card-footer text-danger border-danger'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-danger'>
+              <button class='btn btn-warning' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 // Mercado
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '3' AND st_transacao = 'Depósito' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-dark text-center border-success'>
-<div class='card-header border-success'>Mercado</div>
-".$obj->descricao."
-<div class='card-footer text-success border-success'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-success'>
-<button class='btn btn-dark' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-dark text-center border-success'>
+              <div class='card-header border-success'>Mercado</div>
+              ".$obj->descricao."
+              <div class='card-footer text-success border-success'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-success'>
+              <button class='btn btn-dark' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '3' AND st_transacao = 'Extração' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-dark text-center border-danger'>
-<div class='card-header border-danger'>Mercado</div>
-".$obj->descricao."
-<div class='card-footer text-danger border-danger'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-danger'>
-<button class='btn btn-dark' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-dark text-center border-danger'>
+              <div class='card-header border-danger'>Mercado</div>
+              ".$obj->descricao."
+              <div class='card-footer text-danger border-danger'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-danger'>
+              <button class='btn btn-dark' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 // Moradia
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '4' AND st_transacao = 'Depósito' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-info text-center border-success'>
-<div class='card-header border-success'>Moradia</div>
-".$obj->descricao."
-<div class='card-footer text-success border-success'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-success'>
-<button class='btn btn-info' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-info text-center border-success'>
+              <div class='card-header border-success'>Moradia</div>
+              ".$obj->descricao."
+              <div class='card-footer text-success border-success'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-success'>
+              <button class='btn btn-info' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 $query1 ="SELECT * FROM transacao, forma WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND id_categoria = '4' AND st_transacao = 'Extração' AND cd_forma = id_forma";
-  if ($result = $mysqli->query($query1)) {
-      while ($obj = $result->fetch_object()) {
-echo "<div class='card bg-info text-center border-danger'>
-<div class='card-header border-danger'>Moradia</div>
-".$obj->descricao."
-<div class='card-footer text-danger border-danger'>
-".$obj->st_transacao." - R$ ".$obj->vl_transacao."
-</div>
-<div class='card-footer border-danger'>
-<button class='btn btn-info' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
-</div>
-</div>
-</div>";
-}
+if ($result = $mysqli->query($query1)) {
+    while ($obj = $result->fetch_object()) {
+        echo "<div class='card bg-info text-center border-danger'>
+              <div class='card-header border-danger'>Moradia</div>
+              ".$obj->descricao."
+              <div class='card-footer text-danger border-danger'>
+              ".$obj->st_transacao." - R$ ".$obj->vl_transacao."
+              </div>
+              <div class='card-footer border-danger'>
+              <button class='btn btn-info' type='button' data-toggle='collapse' data-target='#collapseExample'><div id='nav-icon1'>
+              <span></span>
+              <span></span>
+              <span></span>
+              </div>
+              <div class='collapse' id='collapseExample'>".$obj->dt_transacao."<br>".$obj->ds_forma."
+              </div>
+              </div>
+              </div>";
+    }
 }
 ?>
 </div>
@@ -201,64 +201,62 @@ echo "<div class='card bg-info text-center border-danger'>
 <div class="col-lg-3">
 <div class="card-columns">
 <div class="card border-success" style="position: relative; width: 300%; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-  <div class="card-header text-success"><center>Entrada</center></div>
-  <div class="card-body text-success">
+    <div class="card-header text-success"><center>Entrada</center></div>
+    <div class="card-body text-success">
   	<?php
-  	$query = "SELECT SUM(vl_transacao) as 'entrada' FROM transacao WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND st_transacao = 'Extração'";
+    $query = "SELECT SUM(vl_transacao) as 'entrada' FROM transacao WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND st_transacao = 'Extração'";
   	if ($result = $mysqli->query($query)) {
     	while ($obj = $result->fetch_object()){
-        if($obj->entrada == 0){
-          $obj->entrada = 0;
-          echo "R$ ".$obj->entrada;
-        }
-        else{
-        echo "R$ ".$obj->entrada;
-        }
+            if($obj->entrada == 0){
+                $obj->entrada = 0;
+                echo "R$ ".$obj->entrada;
+            }
+            else{
+                echo "R$ ".$obj->entrada;
+            }
     	}
     }
   	?>
-  </div>
-  </div>
+    </div>
+</div>
 </div>
 <div class="card-columns">
-  <div class="card border-danger" style="position: relative; width: 300%; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-  <div class="card-header text-danger"><center>Saída</center></div>
-  <div class="card-body text-danger">
+<div class="card border-danger" style="position: relative; width: 300%; box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
+    <div class="card-header text-danger"><center>Saída</center></div>
+    <div class="card-body text-danger">
   	<?php
-  	$query = "SELECT SUM(vl_transacao) as 'saida' FROM transacao WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND st_transacao = 'Depósito'";
+    $query = "SELECT SUM(vl_transacao) as 'saida' FROM transacao WHERE id_tb_usuario = '".$_SESSION['COD_USER']."' AND st_transacao = 'Depósito'";
   	if ($result = $mysqli->query($query)) {
     	while ($obj = $result->fetch_object()) {
-        if($obj->saida == 0){
-          $obj->saida = 0;
-          echo "R$ ".$obj->saida;
-        }
-        else{
-        echo "R$ ".$obj->saida;
-        }
+            if($obj->saida == 0){
+                $obj->saida = 0;
+                echo "R$ ".$obj->saida;
+            }
+            else{
+                echo "R$ ".$obj->saida;
+            }
     	}
     }
   	?>
-  </div>
-  </div>	
-  </div>
-<center>
-<br>
+    </div>
+</div>	
+</div>
+<center><br>
 <form action="index2.html" method="post">
 <a href="index.php"><input type="button" class="btn btn-danger" value="Sair"></a>
 <a href='delete3.php'><input type='button' class='btn btn-warning' value='Excluir Tudo'></a>
 </center>
-</div>
-</div>
-</div>
 </form>
+</center>
+</div>
+</div>
+</div>
 <style type="text/css">
 html{
 	width: 100%!important;
 	font-family: Arial;
 	font-size: 20px;
 }
-</style>
-<style type="text/css">
 .example{  
   background-color: #eee; 
   width: 200px;  
@@ -269,8 +267,6 @@ html{
 .example::-webkit-scrollbar {
   display: none;
 }
-</style>
-<style type="text/css">
 #nav-icon1{
   width: 60px;
   height: 45px;
