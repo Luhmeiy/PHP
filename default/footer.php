@@ -1,4 +1,5 @@
 <!-- Site footer -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <footer class="site-footer">
     <div class="container column">
         <div class="row">
@@ -13,7 +14,7 @@
             </div>
             <div class="col-md-4">
                 <ul class="social-icons">
-                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>  
+                    <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>  
                 </ul>
             </div>
         </div>

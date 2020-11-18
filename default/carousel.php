@@ -5,7 +5,7 @@
 	<div class='item carousel-item active'>
 		<div class='row justify-content-center'>
 		<?php
-			$query = "SELECT * FROM shop ORDER BY qnt_comprada desc LIMIT 4";
+			$query = "SELECT * FROM shopin ORDER BY qnt_comprada desc LIMIT 4";
     		if ($result = $mysqli->query($query)) {
     		while ($obj = $result->fetch_object()) {
       			printf ("<div class='col-sm-3'>
@@ -16,15 +16,6 @@
 								<div class='thumb-content'>
 									<h4>%s</h4>
 									<p class='item-price'>R$ %s</p>
-									<div class='star-rating'>
-										<ul class='list-inline'>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star-o'></i></li>
-										</ul>
-									</div>
 									<a href='#' class='btn btn-primary'>Adicionar ao carrinho</a>
 								</div>						
 							</div>
@@ -38,7 +29,7 @@
 	<div class='item carousel-item'>
 		<div class='row justify-content-center'>
 		<?php
-			$query = "SELECT * FROM shop ORDER BY qnt_comprada desc LIMIT 4, 4";
+			$query = "SELECT * FROM shopin ORDER BY qnt_comprada desc LIMIT 4, 4";
     		if ($result = $mysqli->query($query)) {
     		while ($obj = $result->fetch_object()) {
       			printf ("<div class='col-sm-3'>
@@ -49,15 +40,6 @@
 								<div class='thumb-content'>
 									<h4>%s</h4>
 									<p class='item-price'>R$ %s</p>
-									<div class='star-rating'>
-										<ul class='list-inline'>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star-o'></i></li>
-										</ul>
-									</div>
 									<a href='#' class='btn btn-primary'>Adicionar ao carrinho</a>
 								</div>						
 							</div>
@@ -71,7 +53,7 @@
 	<div class='item carousel-item'>
 		<div class='row justify-content-center'>
 		<?php
-			$query = "SELECT * FROM shop ORDER BY qnt_comprada desc LIMIT 8, 4";
+			$query = "SELECT * FROM shopin ORDER BY qnt_comprada desc LIMIT 8, 4";
     		if ($result = $mysqli->query($query)) {
     		while ($obj = $result->fetch_object()) {
       			printf ("<div class='col-sm-3'>
@@ -82,15 +64,6 @@
 								<div class='thumb-content'>
 									<h4>%s</h4>
 									<p class='item-price'>R$ %s</p>
-									<div class='star-rating'>
-										<ul class='list-inline'>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star'></i></li>
-											<li class='list-inline-item'><i class='fa fa-star-o'></i></li>
-										</ul>
-									</div>
 									<a href='#' class='btn btn-primary'>Adicionar ao carrinho</a>
 								</div>						
 							</div>
