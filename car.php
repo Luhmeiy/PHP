@@ -3,7 +3,7 @@
 session_start();
 include "default/conecta.php";
 if (empty($_SESSION['COD_USER'])) { //se a sessão estiver vazia, define a sessão como 0, assim previnindo erros
-  $_SESSION['COD_USER'] = '0';
+    $_SESSION['COD_USER'] = '0';
 }
 ?>
 <html>
@@ -12,9 +12,7 @@ if (empty($_SESSION['COD_USER'])) { //se a sessão estiver vazia, define a sess�
 <head>
   <title>Carrinho</title>
 <!-- Início dos links externos -->
-<?php
-include "default/bootstrap.php";
-?>
+<?php include "default/bootstrap.php"; ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="CSS/css.css">
 <link rel="stylesheet" type="text/css" href="CSS/car.css">
@@ -25,10 +23,32 @@ include "default/bootstrap.php";
 </head>
 <body>
 <!-- Início do header -->
-<header id="header" class="sticky" style="position: relative;">
+<header id="header" class="sticky" style="position: relative; background-color: #FFA500;">
 <a href="index.php" class="logo">Barrica's Bar</a>
 </header>
 <!-- Fim do header -->
+<?php
+    if (isset($_POST['atualizar'])){
+        $id = $_POST['id'];
+        $qnt = $_POST['qnt'];
+        foreach ($id as $v => $code) {
+            if ($result = $mysqli->query("SELECT * FROM cart WHERE cart_user = '".$_SESSION['COD_USER']."'")) {
+                $row_cnt = $result->num_rows;
+                if ($row_cnt == 0) {
+                    echo "CCCCCCCCCCCCC"; 
+                }
+                else {
+                    $query = "UPDATE cart SET qnt_cart = '".$qnt[$v]."' WHERE prod = '".$code."' AND cart_user = '".$_SESSION['COD_USER']."'"; //verifica se os dados do login conferem
+                    if ($result = $mysqli->query($query)){
+                    }
+                }
+            }
+            else {
+                echo "BBBBBBBBBBBBBBBBB".$_POST['qnt'];
+            }
+        }
+    }
+?>
 <?php
 if (isset($_POST['checkout'])) { //se o POST for preenchido, redireciona para a página de checkout
     header("location:checkout.php");
@@ -69,9 +89,10 @@ else{
     <div class='col-md-8'>
     <!-- Início do php que exibe os itens no carrinho -->
     <?php
-        $query = "SELECT * FROM cart, shop WHERE prod = cd_shop AND cart_user = '".$_SESSION['COD_USER']."'"; //exibe os itens se o código do produto na tabela carrinho for o mesmo código que na tabela shop e se o código do usuário na sessão for o mesmo que o código na tabela carrinho
+        $query = "SELECT *,SUM(qnt_cart)*vl_shop AS vl_prodall  FROM cart, shopin WHERE prod = cd_shop AND cart_user = '".$_SESSION['COD_USER']."' GROUP BY prod"; //exibe os itens se o código do produto na tabela carrinho for o mesmo código que na tabela shop e se o código do usuário na sessão for o mesmo que o código na tabela carrinho
         if ($result = $mysqli->query($query)) {
         while ($obj = $result->fetch_object()) {
+            $a[] = $obj->qnt_cart;
             printf ("<div class='row justify-content-center'>
                     <div class='col-md-2'>
                       <a href='prod.php?cod=%s'><img src='%s' id='img' style='width: 62px;'></a>
@@ -81,7 +102,8 @@ else{
                     </div>
                     <div class='col-md-2'>R$ %s</div>
                     <div class='product-quantity col-md-2' id='qtn'>
-                      <input class='form-control' type='number' value='%s'>
+                      <input class='form-control' type='number' value='%s' name='qnt[]'>
+                      <input type='hidden' value='%s' name='id[]'>
                     </div>
                     <div class='col-md-1'>
                       <td class='col-sm-2 col-md-1' class='product-removal'>
@@ -91,11 +113,13 @@ else{
                       </td>
                     </div>
                     <div class='col-md-2'>R$ %s</div>
-                    </div><hr>", $obj->cd_shop, $obj->img_shop, $obj->cd_shop, $obj->nm_shop, $obj->vl_shop, $obj->qnt_cart, $obj->cd_cart, $obj->vl_shop); //cada objeto é inserido em um dos %s presentes no printf
+                    </div><hr>", $obj->cd_shop, $obj->img_shop, $obj->cd_shop, $obj->nm_shop, $obj->vl_shop, $obj->qnt_cart, $obj->cd_shop, $obj->cd_cart, number_format($obj->vl_prodall, 2)); //cada objeto é inserido em um dos %s presentes no printf
+
         }
         $result->close();
         }
     ?>
+    <input type="submit" id="at" name="atualizar" class="btno btn-success checkout" value="Atualizar Carrinho">
     <!-- Fim do php que exibe os itens no carrinho -->
     </div>
     <div class="col-md-4">
@@ -104,12 +128,14 @@ else{
                 <label>Subtotal</label>
                 <div class="totals-value" id="cart-subtotal">
                 <?php
-                    $query = "SELECT SUM(vl_shop) AS soma FROM cart, shop WHERE prod = cd_shop AND user = '".$_SESSION['COD_USER']."'"; //seleciona a soma dos valores como soma se o código do produto na tabela carrinho for o mesmo código que na tabela shop e se o código do usuário na sessão for o mesmo que o código na tabela carrinho
+                    $query = "SELECT SUM(qnt_cart)*vl_shop AS comprados FROM cart, shopin WHERE cd_shop = prod AND cart_user = '".$_SESSION['COD_USER']."' GROUP BY prod";
                     if ($result = $mysqli->query($query)) {
-                    while ($obj = $result->fetch_object()) {
-                        $_SESSION['soma'] = $obj->soma; //adiciona o objeto soma na sessão soma
-                        echo "".$_SESSION['soma'].".00"; //exibe a sessão soma
-                    }
+                        while ($obj = $result->fetch_object()) {
+                            $resultado += $obj->comprados;
+                        }
+                        $_SESSION['soma'] = $resultado;
+                        echo number_format($resultado, 2);
+                        $result->close();
                     }
                 ?>
                 </div>
@@ -118,8 +144,11 @@ else{
                 <label>Taxa (5%)</label>
                 <div class="totals-value" id="cart-tax">
                 <?php
-                    $_SESSION['tax'] = $_SESSION['soma'] * 0.05; //multiplica a sessão soma e adiciona na sessão tax
-                    echo "".$_SESSION['tax'].""; //exibe a sessão soma
+                    $query = "SELECT * FROM cart, shopin WHERE cart_user = '".$_SESSION['COD_USER']."'";
+                    if ($result = $mysqli->query($query)) {
+                            $_SESSION['tax'] = $_SESSION['soma'] * 0.05; //multiplica a sessão soma e adiciona na sessão tax
+                            echo number_format("".$_SESSION['tax']."", 2); //exibe a sessão soma
+                    }
                 ?>
                 </div>
             </div>
@@ -127,7 +156,10 @@ else{
                 <label>Frete</label>
                 <div class="totals-value" id="cart-shipping">
                 <?php
-                    echo "15.00"; //exibe o que seria o valor do frete
+                    if($_SESSION['soma'] != 0)
+                    {
+                    echo "5.00"; //exibe o que seria o valor do frete
+                    }
                 ?>
                 </div>
             </div>
@@ -135,8 +167,8 @@ else{
                 <label>Total</label>
                 <div class="totals-value" id="cart-total">
                 <?php
-                    $_SESSION['total'] = $_SESSION['tax'] + $_SESSION['soma'] + 15; //adiciona a sessão tax somana na sessão soma na sessão total
-                    echo "".$_SESSION['total'].""; //exibe a sessão total
+                    $_SESSION['total'] = $_SESSION['tax'] + $_SESSION['soma'] + 5; //adiciona a sessão tax somana na sessão soma na sessão total
+                    echo number_format("".$_SESSION['total']."", 2); //exibe a sessão total
                 ?>
                 </div>
             </div>
@@ -157,6 +189,10 @@ include "default/footer.php";
 ?>
 <!-- Fim do footer -->
 <style type="text/css">
+#at{
+    width: 200px;
+    float: right;
+}
 svg {
   fill: currentColor;
 }

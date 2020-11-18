@@ -2,7 +2,6 @@
 <?php
 session_start();
 include "default/conecta.php";
-$login = ''; //previne que a variável $login seja dada como indefinida
 $senha = ''; //previne que a variável $senha seja dada como indefinida
 ?>
 <html>
@@ -20,35 +19,30 @@ $senha = ''; //previne que a variável $senha seja dada como indefinida
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v8.0&appId=3421772124582862&autoLogAppEvents=1" nonce="NMTFQ7Va"></script>
 <link rel="stylesheet" type="text/css" href="CSS/login.css">
 <!-- Fim dos links externos -->
 </head>
 <body>
-<div id="fb-root"></div>
 <?php
 if (isset($_POST['login'])) { //verifica se a variável foi definida
     $senha = md5($_POST['senha']); //criptografa a senha utilizando md5
-    $query = "SELECT * FROM user WHERE nm_user = '".$_POST['login']."' AND senha = '".$senha."' OR email = '".$_POST['login']."' AND senha = '".$senha."'"; //verifica se os dados do login conferem
-if ($result = $mysqli->query($query)){
-    while ($obj = $result->fetch_object()){
-      $_SESSION['COD_USER'] = $obj->cd_user; //adiciona o código de usuário na sessão
-      header("location:alert.php?al=2",true); //redireciona o usuário
+    $conn = "SELECT * FROM user WHERE nm_user = ".$_POST['login']." AND senha = ".$senha." OR email = ".$_POST['login']." AND senha = ".$senha.""; //verifica se os dados do login conferem
+    if ($result = $mysqli->query($conn)){
+        while ($obj = $result->fetch_object()){
+            $_SESSION['COD_USER'] = $obj->cd_user; //adiciona o código de usuário na sessão
+            header("location:index.php?al=2"); //redireciona o usuário
+        }
     }
-}    
 }
+$conn->close();
 ?>
 <center style="margin-top: 30vh;">
 <h1><b>Login</b></h1>
 <!-- form de login -->
 <form method="POST" style="width: 280px;">
 <div class="row">
-	<!-- login com Facebook -->
-	<div class="col-md-6">
-	    <div onclick="login()">login</div>
-	</div>
 	<!-- login com Google -->
-	<div class="col-md-6">
+	<div class="col-md-12">
 	    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 	    <a href="#" onclick="signOut();">Sign out</a>
 	</div>
@@ -72,20 +66,6 @@ if ($result = $mysqli->query($query)){
 </form>
 <!-- Fim do form de login -->
 </center>
-<script>
-function login(){
-'/me',
-'GET',
-{"fields":"email,id,name"},
-function(response) {
-var personName = $_GET['email'];
-var personEmail = $_GET['id'];
-var personId = $_GET['name'];
-window.location.href = "somepage.php?name=" + personName + "&email=" + personEmail + "&id=" + personId; //redireciona o usuário junto com suas informações em variáveis
-}
-)
-};
-</script>
 <script>
 function onSignIn(googleUser) { //obtém as informações do usuário que fez login usando o Google
 	var profile = googleUser.getBasicProfile();

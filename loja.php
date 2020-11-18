@@ -10,35 +10,50 @@ include "default/conecta.php";
   <title>Loja</title>
 </head>
 <!-- Início dos links externos -->
-<?php
-include "default/bootstrap.php";
-?>
+<?php include "default/bootstrap.php"; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="CSS/css.css">
 <link rel="stylesheet" type="text/css" href="CSS/footer.css">
 <!-- Fim dos links externos -->
 <body>
 <!-- Início do header -->
-<header id="header" class="sticky" style="position: relative;">
+<header id="header" class="sticky" style="position: relative; width: 100%; background-color: #FFA500;">
 <a href="index.php" class="logo">Barrica's Bar</a>
-<a href="car.php" style="color: black;">Carrinho</a>
+<a href="car.php" style="color: black;"><i class="fa fa-shopping-cart" style="font-size:40px;"></i></a>
 </header>
 <!-- Fim do header -->
 <div class="content-body" >
 <div class="content" style="margin: 3%; margin-top: 2%;">
 <div class="row justify-content-center">
-    <div class="col-lg-12">
+    <div class="col-lg-12" id="content">
         <!-- Divide os produtos por categoria -->
         <div class="row">
             <div class="col-md-6">
-                <center><a>Bebidas</a></center>
+                <center><a style="cursor: pointer;" id="PA1"><i class="fa fa-beer" style="font-size:45px;color:orange;text-shadow: 0 0 5px black;"></i></a></center>
             </div>
             <div class="col-md-6">
-                <center>Comida</center>
+                <center><a style="cursor: pointer;" id="PA2"><i class="fa fa-hamburger" style="font-size:45px;color:orange;text-shadow: 0 0 5px black;"></i></a></center>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 hidden" id="CAT1">
+        <!-- Divide os produtos por categoria -->
+        <div class="row">
+            <div class="col-md-12">
+                <center><a style="cursor: pointer;" id="arrow" style="cursor: pointer;">Limpar categoria</a></center>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 hidden" id="CAT2">
+        <!-- Divide os produtos por categoria -->
+        <div class="row">
+            <div class="col-md-12">
+                <center><a style="cursor: pointer;" id="arrow2" style="cursor: pointer;">Limpar categoria</a></center>
             </div>
         </div>
     </div>
     <!-- Início do carrossel -->
-    <div class="col-xs-12 justify-content-center">
+    <div class="col-xs-12">
         <center><div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel" style="width: 100vw;">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -66,18 +81,78 @@ include "default/bootstrap.php";
             </a>
         </div></center>
         <!-- Fim do carrossel -->
-        <div class="col-xs-12 col-md-11 col">
+        <div class="col-xs-12 col-md-12 col" id="cc">
             <div class="row">
             <!-- Exibe todos os produtos -->
             <?php
-                $query = "SELECT * FROM shop"; //seleciona tudo da tabela shop
+                $query = "SELECT * FROM shopin"; //seleciona tudo da tabela shopin
                 if ($result = $mysqli->query($query)) {
                 while ($obj = $result->fetch_object()) {
                     printf ("<div class='column1 col-md-4' style='padding-right: 10px;'>
                             <div class='card mb-3'>
                             <div class='row no-gutters'>
                             <div class='col-md-6'>
-							<a href='prod.php?cod=%s'><img class='card-img-top' src='%s' alt=''></a>
+                            <a href='prod.php?cod=%s'><img class='card-img-top' id='img-expand' id='img' src='%s' alt='' width='200px' height='200px'></a>
+                            </div>
+                            <div class='col-md-6'>
+                            <div class='card-body'>
+                            <a href='prod.php?cod=%s' style='color: black; text-decoration: none;'><h4>%s<h4>
+                            <h5>R$ %s</h5>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </a>", $obj->cd_shop, $obj->img_shop, $obj->cd_shop, $obj->nm_shop, $obj->vl_shop);
+                }
+                $result->close();
+                }
+            ?>
+            </div>
+        </div>
+        <!---- Bebidas ---->
+        <div class="col-xs-12 col-md-12 col hidden" id="RP1">
+            <div class="row">
+            <!-- Exibe todos os produtos -->
+            <?php
+                $query = "SELECT * FROM shopin WHERE id_stt = '1'"; //seleciona tudo da tabela shopin
+                if ($result = $mysqli->query($query)) {
+                while ($obj = $result->fetch_object()) {
+                    printf ("<div class='column1 col-md-4' style='padding-right: 10px;'>
+                            <div class='card mb-3'>
+                            <div class='row no-gutters'>
+                            <div class='col-md-6'>
+                            <a href='prod.php?cod=%s'><img class='card-img-top' id='img-expand' id='img' src='%s' alt='' width='200px' height='200px'></a>
+                            </div>
+                            <div class='col-md-6'>
+                            <div class='card-body'>
+                            <a href='prod.php?cod=%s' style='color: black; text-decoration: none;'><h4>%s<h4>
+                            <h5>R$ %s</h5>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </a>", $obj->cd_shop, $obj->img_shop, $obj->cd_shop, $obj->nm_shop, $obj->vl_shop);
+                }
+                $result->close();
+                }
+            ?>
+            </div>
+        </div>
+        <!---- Comidas ---->
+        <div class="col-xs-12 col-md-12 col hidden" id="RP2">
+            <div class="row">
+            <!-- Exibe todos os produtos -->
+            <?php
+                $query = "SELECT * FROM shopin  WHERE id_stt = '2'"; //seleciona tudo da tabela shopin
+                if ($result = $mysqli->query($query)) {
+                while ($obj = $result->fetch_object()) {
+                    printf ("<div class='column1 col-md-4' style='padding-right: 10px;'>
+                            <div class='card mb-3'>
+                            <div class='row no-gutters'>
+                            <div class='col-md-6'>
+                            <a href='prod.php?cod=%s'><img class='card-img-top' id='img-expand' id='img' src='%s' alt='' width='200px' height='200px'></a>
                             </div>
                             <div class='col-md-6'>
                             <div class='card-body'>
@@ -106,16 +181,16 @@ include "default/footer.php";
 <!-- Fim do footer -->
 <style type="text/css">
 .col {
-    float: right;
-    margin: 20px;
-    padding-bottom: 100px;
-    margin-bottom: -100px;
-}
-.card-img-top{
-    height: 230px;
     width: 100%;
-    object-fit: cover;
-    object-position: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-image: url("https://i.pinimg.com/originals/df/80/8f/df808f6bfc95b04ecfa02502c905ca7e.jpg");
+}
+body {
+    background-image: url("https://i.pinimg.com/originals/df/80/8f/df808f6bfc95b04ecfa02502c905ca7e.jpg");
+}
+html {
+    width: 100%;
 }
 </style>
 <script type="text/javascript">
@@ -140,6 +215,38 @@ function ourFunction(y) {
     } else {
     }
 }
+$(document).ready(function() {
+    $("#arrow").click(function(){
+        $("#RP1").addClass("hidden");
+        $("#CAT1").addClass("hidden"); 
+        $("#content").removeClass("hidden");
+        $("#cc").removeClass("hidden");
+    });
+})
+$(document).ready(function() {
+    $("#PA1").click(function(){
+        $("#RP1").removeClass("hidden");
+        $("#CAT1").removeClass("hidden");
+        $("#content").addClass("hidden");
+        $("#cc").addClass("hidden");
+    });
+})
+$(document).ready(function() {
+    $("#arrow2").click(function(){
+        $("#RP2").addClass("hidden");    
+        $("#CAT2").addClass("hidden");
+        $("#content").removeClass("hidden");
+        $("#cc").removeClass("hidden");
+    });
+})
+$(document).ready(function() {
+    $("#PA2").click(function(){
+        $("#RP2").removeClass("hidden");
+        $("#CAT2").removeClass("hidden");
+        $("#content").addClass("hidden");
+        $("#cc").addClass("hidden");
+    });
+})
 </script>
 </body>
 </html>

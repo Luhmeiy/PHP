@@ -9,9 +9,7 @@ include "default/conecta.php";
 <head>
 	<title>Sobre Nós</title>
 <!-- Início dos links externos -->
-<?php
-include "bootstrap.php";
-?>
+<?php include "bootstrap.php"; ?>
 <link rel="stylesheet" type="text/css" href="CSS/car.css">
 <link rel="stylesheet" type="text/css" href="CSS/css.css">
 <link rel="stylesheet" type="text/css" href="CSS/footer.css">
@@ -19,9 +17,7 @@ include "bootstrap.php";
 </head>
 <body>
 <!-- Início do header -->
-<?php
-include 'default/header.php';
-?>
+<?php include 'default/header.php'; ?>
 <!-- Fim do header -->
 <div class="container">
 <center><div class="row justify-content-center" id="col4">
@@ -36,9 +32,9 @@ include 'default/header.php';
 <p>Protegeremos a confidencialidade de todas as informações e registros relacionados ao usuário, armazenando no servidor ou em qualquer outro meio magnético de alta segurança, bem como o valor relativo às operações financeiras decorrentes da operação dos serviços prestados neste termo.</p>
 <p>Contudo, não responderemos pela reparação de prejuízos que possam ser derivados de apreensão de dados por parte de terceiros que, rompendo os sistemas de segurança, consigam acessar essas informações.</p>
 </div>
-<?php
-include "default/footer.php";
-?>
+<div style="float: bottom;">
+<?php include "default/footer.php"; ?>
+</div>
 <style type="text/css">
 #text{
 	font-size: 25px;

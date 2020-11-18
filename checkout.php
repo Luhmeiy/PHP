@@ -90,7 +90,6 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
 			</div>
             <!-- Form para o usuário colocar sua localização e forma de pagamento -->
             <form method="POST">
-			<div class="col-md-6">
 				<h1><b>Checkout</b></h1>
 				<h4><p style="color: gray;">Detalhes de Envio</p></h4>
 				<div class="row">
@@ -109,7 +108,6 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
 				<div class="row justify-content-center">
         		  <input type="submit" id="checkout" name="checkout" class="btno btn-success checkout" value="Finalizar Compra" style="width: 50%;">
 				</div>
-			</div>
             </form>
 		</div>
 	</div>

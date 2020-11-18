@@ -22,7 +22,7 @@ include "default/bootstrap.php";
 if (isset($_POST['car'])){
     $prod = $_GET['cod'];
     $user = $_SESSION['COD_USER'];
-    if ($result = $mysqli->query("SELECT * FROM cart WHERE prod = '".$_GET['cod']."'")) {
+    if ($result = $mysqli->query("SELECT * FROM cart WHERE prod = '".$_GET['cod']."' AND cart_user = '".$_SESSION['COD_USER']."'")) {
         /* determine number of rows result set */
         $row_cnt = $result->num_rows;
         if ($row_cnt == 0) {
@@ -47,7 +47,7 @@ if (isset($_POST['car'])){
 <div class="container" style="margin-top: 2%;">
 <?php
     //exibe o nome do produto
-    $query = "SELECT * FROM shop WHERE cd_shop = '".$_GET['cod']."'";
+    $query = "SELECT * FROM shopin WHERE cd_shop = '".$_GET['cod']."'";
     if ($result = $mysqli->query($query)) {
     while ($obj = $result->fetch_object()) {
         printf ("<h1><b>%s</b></h1>", $obj->nm_shop);
@@ -58,7 +58,7 @@ if (isset($_POST['car'])){
     <div class="col-md-4">
     <?php
         //exibe a imagem do produto
-        $query = "SELECT * FROM shop WHERE cd_shop = '".$_GET['cod']."'";
+        $query = "SELECT * FROM shopin WHERE cd_shop = '".$_GET['cod']."'";
         if ($result = $mysqli->query($query)) {
         while ($obj = $result->fetch_object()) {
             printf ("<img id='img' src='%s' width='228px' height='328px'>", $obj->img_shop);
@@ -71,7 +71,7 @@ if (isset($_POST['car'])){
         <div class="row">
         <?php
             //exibe a descrição do produto
-            $query = "SELECT * FROM shop WHERE cd_shop = '".$_GET['cod']."'";
+            $query = "SELECT * FROM shopin WHERE cd_shop = '".$_GET['cod']."'";
             if ($result = $mysqli->query($query)) {
             while ($obj = $result->fetch_object()) {
                 printf ("<h4 style='margin-bottom: 250px;'><b>Descrição do Produto:</b><br> %s</h4>", $obj->desc_shop);
@@ -84,7 +84,7 @@ if (isset($_POST['car'])){
                 <div class="col-md-4">
                 <?php
                     //exibe o preço do produto
-                    $query = "SELECT * FROM shop WHERE cd_shop = '".$_GET['cod']."'";
+                    $query = "SELECT * FROM shopin WHERE cd_shop = '".$_GET['cod']."'";
                     if ($result = $mysqli->query($query)) {
                     while ($obj = $result->fetch_object()) {
                         printf ("<h3><b>R$ %s</b><h3>", $obj->vl_shop);
@@ -107,36 +107,6 @@ if (isset($_POST['car'])){
 include "default/carousel.php";
 ?>
 <!-- Fim do carousel -->
-<div class="row">
-    <hr><br>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h5>Avaliações de clientes</h5>
-        <!-- Sistema de avaliação por estrela -->
-        <?php
-        include "default/avaliacao.php";
-        ?>
-        <!-- Fim do sistema de avaliação por estrela  -->
-        <form method="POST">
-            <textarea id="w3review" name="w3review" rows="4" cols="50" style="resize:none;" placeholder="Faça uma avaliação"></textarea>
-        </form>
-    </div>
-    <div class="col-md-8">
-    <?php
-        //exibe os comentários
-        $query = "SELECT * FROM user, comment, shop WHERE id_user = cd_user AND id_prod = '".$_GET['cod']."'";
-        if ($result = $mysqli->query($query)) {
-        while ($obj = $result->fetch_object()) {
-            printf ("<hr><br>
-                    <h5 style='margin-bottom: -20px;'><b>%s</b></h5><br>
-                    %s<br>", $obj->nm_user, $obj->desc_com);
-        }
-        }
-    ?>
-    <hr><br>
-    </div>
-</div>
 </div>
 <!-- Início do footer -->
 <?php

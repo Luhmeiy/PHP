@@ -5,7 +5,7 @@ include "default/conecta.php";
 ?>
 <html style="overflow-x: hidden;">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 <head>
 	<title>Barrica's Bar</title>
 <!-- Início dos links externos -->
@@ -113,54 +113,15 @@ include "default/conecta.php";
     </div>
     <!-- Fim do carrossel interno -->
 </section>
-<!-- Início do parallax -->
-<div class="parallax">
-    <div class="caption">
-    <?php
-        $query = "SELECT * FROM comment ORDER BY avaliacao DESC LIMIT 1";
-        if ($result = $mysqli->query($query)) {
-        while ($obj = $result->fetch_object()) {
-            printf ("<h1><b>%s</b></h1>", $obj->desc_com);
-            $_SESSION['star'] = '1';
-        }
-        $result->close();
-        }
-    ?>
-    <!-- Sistema de avaliação por estrela -->
-    <?php
-    include "default/avaliacao.php";
-    ?>
-    <!-- Fim do sistema de avaliação por estrela -->
-    </div>
-</div>
-<!-- Fim do parallax -->
+<div class="container">
     <!-- Início do Carousel -->
     <?php
     include "default/carousel.php";
     ?>
     <!-- Fim do carousel -->
-<!-- Início do parallax -->
-<div class="parallax">
-    <div class="caption">
-    <?php
-        $query = "SELECT * FROM comment ORDER BY avaliacao DESC LIMIT 1,2";
-        if ($result = $mysqli->query($query)) {
-        while ($obj = $result->fetch_object()) {
-            printf ("<h1><b>%s</b></h1>", $obj->desc_com);
-        }
-        $result->close();
-        }
-    ?>
-    <!-- Sistema de avaliação por estrela -->
-    <?php
-    include "default/avaliacao.php";
-    ?>
-    <!-- Fim do sistema de avaliação por estrela -->
-    </div>
-</div>
-<!-- Fim do parallax -->
 <!-- Contate-nos e Google Maps -->
-<div class="row" style="margin-top: 3%; padding-bottom: 3%;">
+<div class="row justify-content-center" style="margin-top: 3%; padding-bottom: 3%;">
+    <hr style="width: 80%;">
     <div class="col-md-6">
         <div class="col-md-1"></div>
         <!-- Início do Google Maps -->
@@ -178,37 +139,21 @@ include "default/conecta.php";
         <div class="col-md-10">
             <div class="contact" id="contact">
                 <h1 style="color: #ED421C;">Contate-nos</h1>
-                <input class="form-control" type="text" style="margin-bottom: 10px;" name="name" placeholder="Nome">
-                <input class="form-control" type="text" style="margin-bottom: 10px;" name="email" placeholder="Email">
-                <input class="form-control" type="text" style="margin-bottom: 10px;" name="coment" placeholder="Mensagem">
-                <input type="submit" class="btno car" name="car" style="margin-bottom: 2%;" value="Enviar">
+                <form action="post">
+                    <input class="form-control" type="text" style="margin-bottom: 10px;" name="name" placeholder="Nome">
+                    <input class="form-control" type="text" style="margin-bottom: 10px;" name="email" placeholder="Email">
+                    <input class="form-control" type="text" style="margin-bottom: 10px;" name="coment" placeholder="Mensagem">
+                    <input type="submit" class="btno car" name="car" style="margin-bottom: 2%;" value="Enviar">
+                </form>
             </div>
         </div>
         <!-- Fim do contate-nos -->
         <div class="col-md-1"></div>
     </div>
 </div>
-<!-- Fim do Google Maps e contate-nos -->
-<!-- Início do parallax -->
-<div class="parallax">
-    <div class="caption">
-    <?php
-        $query = "SELECT * FROM comment ORDER BY avaliacao DESC LIMIT 1,3";
-        if ($result = $mysqli->query($query)) {
-        while ($obj = $result->fetch_object()) {
-            printf ("<h1><b>%s</b></h1>", $obj->desc_com);
-        }
-        $result->close();
-        }
-    ?>
-    <!-- Sistema de avaliação por estrela -->
-    <?php
-    include "default/avaliacao.php";
-    ?>
-    <!-- Fim do sistema de avaliação por estrela -->
-    </div>
 </div>
-<!-- Fim do parallax -->
+
+<!-- Fim do Google Maps e contate-nos -->
 <!-- Início do footer -->
 <?php
 include "default/footer.php";
@@ -228,30 +173,6 @@ include "default/footer.php";
 	filter: blur(1px);
 	background-color: black;
 }
-.parallax{
-    position: relative;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("https://images.unsplash.com/photo-1506968430777-bf7784a87f23?ixlib=rb-1.2.1&w=1000&q=80");
-    min-height: 400px;
-}
-.caption {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    font-size: 25px;
-    letter-spacing: 10px;
-}
-/* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1024px) {
-    .bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: scroll;
-    }
-}
 </style>
 <script type="text/javascript">
 window.addEventListener("scroll", function(){
@@ -263,5 +184,29 @@ window.addEventListener("scroll", function(){
     list.classList.toggle("hidden", window.scrollY > 1);
 });
 </script>
+    <?php
+    $nomecon = $_POST('name');
+    $emailcon = $_POST('email');
+    $msgcon = $_POST('coment');
+    // emails para quem será enviado o formulário
+    $emailenviar = "medeiros.luizhenrique@yahoo.com.br";
+    $destino = $emailenviar;
+    $assunto = "Contato pelo Site";
+    $arquivo = $msgcon;
+    // É necessário indicar que o formato do e-mail é html
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    $headers .= 'From: '.$nomecon.' <$email>';
+    //$headers .= "Bcc: $EmailPadrao\r\n";
+    $enviaremail = mail($destino, $assunto, $arquivo, $headers);
+    if($enviaremail)
+    {
+        echo "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
+        echo $arquivo;
+    } else 
+    {
+        echo "ERRO AO ENVIAR E-MAIL!";
+    }
+    ?>
 </body>
 </html>

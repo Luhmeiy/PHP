@@ -41,6 +41,7 @@ if (isset($_POST['user'])){ //verifica se a variável foi definida
         }
     }
 }
+$mysqli->close();
 ?>
 <center style="margin-top: 30vh;">
 <h1><b>Cadastro</b></h1>

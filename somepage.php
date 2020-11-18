@@ -13,7 +13,7 @@ include "default/conecta.php";
                 if ($result = $mysqli->query($query)){
                 while ($obj = $result->fetch_object()){
                     $_SESSION['COD_USER'] = $obj->cd_user; //adiciona o código de usuário na sessão
-                    header("location:index.php"); //redireciona o usuário
+                    header("location:alert.php?al=2",true); //redireciona o usuário
                 }
                 }
         	}
@@ -24,7 +24,7 @@ include "default/conecta.php";
             if ($result = $mysqli->query($query)){
             while ($obj = $result->fetch_object()){
                 $_SESSION['COD_USER'] = $obj->cd_user; //adiciona o código de usuário na sessão
-                header("location:index.php"); //redireciona o usuário
+                header("location:alert.php?al=2",true); //redireciona o usuário
             }
             }
         }
