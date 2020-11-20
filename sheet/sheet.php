@@ -2,7 +2,7 @@
     <div class='col-md-6'>
         <div class='col-md-12' id='input'>
         <?php
-            $query = "SELECT * FROM roles WHERE cd_role = 1";
+            $query = "SELECT * FROM roles, sheet WHERE cd_role = id_role AND id_sheet_user = ".$_SESSION['COD_USER']."";
             if ($result = $mysqli->query($query)){
                 while ($obj = $result->fetch_object()){
     	            printf ("<a href='role.php?cod=%s'><img class='card-img-top' src='%s' alt='Card image cap'></a>
@@ -17,7 +17,7 @@
         <div class='col-md-12' id='input'>
         <form method="POST">
         <?php
-            $query = "SELECT * FROM stts WHERE id_stt = 1";
+            $query = "SELECT * FROM steet WHERE id_stt_sheet = ".$_SESSION['COD_USER']."";
             if ($result = $mysqli->query($query)){
                 while ($obj = $result->fetch_object()){
     	            printf ("<div class='row' id='row'>
@@ -25,7 +25,7 @@
     	                     <div class='col-md-4'><input class='form-control' type='number' value='%s' name='qnt[]' style='float: right;'>
     	                     <input type='hidden' value='%s' name='id[]'>
     	                     </div>
-    	                     </div>", $obj->nm_stt, $obj->vl_stt, $obj->cd_stt);
+    	                     </div>", $obj->nm_stt_sheet, $obj->vl_stt_sheet, $obj->cd_stt_sheet);
                 }
             }
         ?>
