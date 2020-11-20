@@ -10,7 +10,7 @@
   	<div class="collapse navbar-collapse" id="navbarText">
     	<ul class="navbar-nav mr-auto">
       		<li class="nav-item">
-        		<a class="nav-link" href="https://legendsslayer.000webhostapp.com/rpg-cyberpunk">Classes</a>
+        		<a class="nav-link" href="https://legendsslayer.000webhostapp.com/rpg-cyberpunk/roles.php">Classes</a>
       		</li>
       		<li class="nav-item">
         		<a class="nav-link" href="https://legendsslayer.000webhostapp.com/rpg-cyberpunk/enemies.php">Inimigos</a>
@@ -24,6 +24,13 @@
       		<li class="nav-item">
         		<a class="nav-link" href="https://legendsslayer.000webhostapp.com/rpg-cyberpunk/about.php">Sobre o Sistema</a>
       		</li>
+      		<?php 
+      		    if($_SESSION['COD_USER'] == 2) {
+      		        echo "<li class='nav-item'>
+        		          <a class='nav-link' href='https://legendsslayer.000webhostapp.com/rpg-cyberpunk/dashboard.php'>Dashboard</a>
+        		          </li>";
+      		    }
+      		?>
     	</ul>
   	</div>
   	<form class="form-inline" style="padding-right: 25px;" id="myP">
