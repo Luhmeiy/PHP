@@ -19,9 +19,6 @@
     <button class="next" style="float: right;"><i class="fas fa-arrow-right"></i></button>
     <div class="movable">
         <div>
-            
-        </div>
-        <div>
             <?php include "sheet/sheet.php"; ?>
         </div>
         <div>
@@ -45,8 +42,6 @@ $(function(){
             $movable.css({transform: "translateX(-"+ (C*100) +"%)"});
         }
         $(".prev, .next", this).on("click", anim);
-        $gal.hover(stop, play);
-        play();
     });
 });
 </script>

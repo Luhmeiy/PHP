@@ -17,39 +17,20 @@
         <div class="container" id="txt">
             <h1 id="txt-c">RPG - Cyberpunk</h1>
             <p id="txt-c">O mundo vasto de RPG - Cyberpunk pode parecer maravilhoso a princípio, mas logo você descobrira que a vida não é tão fácil assim. De gigantes corporações a milícias e crime organizado, robôs gigantes ainda parecem uma surpresa para muitos dos jogadores. Cada rua, cada viela, cada centímetro da cidade contém um segredo ou um perigo: basta saber procurar!</p>
-        <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open modal</button>
-    <!-- The Modal -->
-    <div class="modal" id="myModal" style="color: black; text-decoration: none;">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h1 class="modal-title">Modal Heading</h1>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <h3>Some text to enable scrolling..</h3>
-                    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-        </div>
-    <section class="container item2">
-        <div id="txt">
-            <h1 id="txt-c">RPG - Cyberpunk</h1>
-            <p id="txt-c">O mundo vasto de RPG - Cyberpunk pode parecer maravilhoso a princípio, mas logo você descobrira que a vida não é tão fácil assim. De gigantes corporações a milícias e crime organizado, robôs gigantes ainda parecem uma surpresa para muitos dos jogadores. Cada rua, cada viela, cada centímetro da cidade contém um segredo ou um perigo: basta saber procurar!</p>
         </div>
     </section>
-    <section class="container item3">
-        <div id="txt">
-            <h1 id="txt-c">RPG - Cyberpunk</h1>
-            <p id="txt-c">O mundo vasto de RPG - Cyberpunk pode parecer maravilhoso a princípio, mas logo você descobrira que a vida não é tão fácil assim. De gigantes corporações a milícias e crime organizado, robôs gigantes ainda parecem uma surpresa para muitos dos jogadores. Cada rua, cada viela, cada centímetro da cidade contém um segredo ou um perigo: basta saber procurar!</p>
+    <section class="item2">
+        <div class="container" id="txt">
+            <h1 id="txt-c">Rio de Março</h1>
+            <p id="txt-c">A principal cidade do Brasil Cyberpunk, toma a extensão do que antes era todo o Sudeste brasileiro. Mesmo com tamanha extensão territorial, a cidade está superpopulada, em especial por criminosos. Os civis constantemente se encontram em perigo com os tiroteios, gangues e perseguições em alta velocidade. As corporações dominam a cidade, mas um novo poder cresce cada vez mais, formando braços que aos poucos se fecham sobre os altos prédios espelhados.</p>
+            <?php include "modal/modal-RM.php"; ?>
+        </div>
+    </section>
+    <section class="item3">
+        <div class="container" id="txt">
+            <h1 id="txt-c">NeoPaul</h1>
+            <p id="txt-c">A cerca de meio século, uma guerra aconteceu na área baixa de São Paulo, levando a vida de milhares de cidadões. Negando ajuda, os habitantes da área alta colocaram em prática o plano que há muito já sabiam ser inevitável: uma cidade flutuante. Os mais de 300km² voadores foram financiados pelos Estados Unidos da América do Norte.</p>
+            <?php include "modal/modal-NP.php"; ?>
         </div>
     </section>
     <section style="height: auto;">
@@ -92,13 +73,13 @@ section {
     text-transform: uppercase;
 }
 .modal-body::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 .modal-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 .modal-body::-webkit-scrollbar-thumb {
-  background-color: #F90;
+    background-color: #F90;
 }
 </style>
 </body>

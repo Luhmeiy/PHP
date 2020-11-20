@@ -13,7 +13,6 @@ include "default/conect2.php";
 <?php include "default/bootstrap.php"; ?>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<link rel="stylesheet" type="text/css" href="CSS/login.css">
 <!-- Fim dos links externos -->
 </head>
 <body>

@@ -33,32 +33,19 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-12">
             <?php
-                $query = "SELECT * FROM roles WHERE cd_role = 1";
+                $query = "SELECT * FROM roles, sheet WHERE cd_role = id_role AND id_sheet_user = ".$_SESSION['COD_USER']."";
                 if ($result = $mysqli->query($query)){
                     while ($obj = $result->fetch_object()){
-                	    printf ("<div class='module mid'>
-                                 <a href='role.php?cod=%s'><img src='%s' class='bg-img'></a>
+                	    printf ("<div class='col-md-12'>
+                	             <div class='module mid'>
+                                 <a href='sheet.php'><img src='%s' class='bg-img'></a>
                                  <p><h2>%s</h2></p>
-                                 </div>", $obj->cd_role, $obj->img_role, $obj->nm_role);
+                                 </div>
+                                 </div>", $obj->img_role, $obj->nm_role);
                     }
                 }
             ?>
-            </div>
-            <div class="col-md-12">
-            <?php
-                $query = "SELECT * FROM roles WHERE cd_role = 1";
-                if ($result = $mysqli->query($query)){
-                    while ($obj = $result->fetch_object()){
-                	    printf ("<div class='module mid'>
-                                 <a href='role.php?cod=%s'><img src='%s' class='bg-img'></a>
-                                 <p><h2>%s</h2></p>
-                                 </div>", $obj->cd_role, $obj->img_role, $obj->nm_role);
-                    }
-                }
-            ?>
-            </div>
         </div>
     </div>
 </div>

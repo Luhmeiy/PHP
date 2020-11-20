@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 18-Nov-2020 às 15:20
+-- Tempo de geração: 20-Nov-2020 às 03:28
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.3.23
 
@@ -94,7 +94,7 @@ CREATE TABLE `inv_gun` (
 --
 
 INSERT INTO `inv_gun` (`cd_inv_gun`, `id_gun`, `id_user_gun`, `active_gun`) VALUES
-(1, 1, 1, 1);
+(1, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +112,7 @@ CREATE TABLE `itens` (
   `max_dmg_gun` int(255) NOT NULL,
   `range_gun` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `rare_gun` int(5) NOT NULL,
+  `price` int(100) NOT NULL,
   `txt_gun` varchar(999) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -119,10 +120,10 @@ CREATE TABLE `itens` (
 -- Extraindo dados da tabela `itens`
 --
 
-INSERT INTO `itens` (`cd_gun`, `nm_gun`, `img_gun`, `cat_gun`, `subcat_gun`, `min_dmg_gun`, `max_dmg_gun`, `range_gun`, `rare_gun`, `txt_gun`) VALUES
-(1, 'Metralhadora Leve', '', 3, 1, 0, 0, '0', 0, 'A'),
-(2, 'Pistola Elétrica', '', 1, 2, 0, 0, '0', 0, 'A'),
-(3, 'Pistola Mecânica', '', 1, 2, 0, 0, '0', 0, 'A');
+INSERT INTO `itens` (`cd_gun`, `nm_gun`, `img_gun`, `cat_gun`, `subcat_gun`, `min_dmg_gun`, `max_dmg_gun`, `range_gun`, `rare_gun`, `price`, `txt_gun`) VALUES
+(1, 'Metralhadora Leve', '', 2, 2, 0, 0, '0', 0, 100, 'A'),
+(2, 'Pistola Elétrica', '', 3, 5, 0, 0, '0', 0, 0, 'A'),
+(3, 'Pistola Mecânica', '', 3, 5, 0, 0, '0', 0, 0, 'A');
 
 -- --------------------------------------------------------
 
@@ -159,13 +160,59 @@ INSERT INTO `roles` (`cd_role`, `nm_role`, `img_role`, `txt_role`, `id_cat`, `ca
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `sheet`
+--
+
+CREATE TABLE `sheet` (
+  `cd_sheet` int(11) NOT NULL,
+  `nm_sheet` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `img_sheet` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_role` int(11) NOT NULL,
+  `id_sheet_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `sheet`
+--
+
+INSERT INTO `sheet` (`cd_sheet`, `nm_sheet`, `img_sheet`, `id_role`, `id_sheet_user`) VALUES
+(1, 'Rottaisu', 'Rottaisu', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `steet`
+--
+
+CREATE TABLE `steet` (
+  `cd_stt_sheet` int(11) NOT NULL,
+  `id_stt_sheet` int(11) NOT NULL,
+  `nm_stt_sheet` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `vl_stt_sheet` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `steet`
+--
+
+INSERT INTO `steet` (`cd_stt_sheet`, `id_stt_sheet`, `nm_stt_sheet`, `vl_stt_sheet`) VALUES
+(55, 2, 'Inteligência', 5),
+(56, 2, 'Força', 0),
+(57, 2, 'Agilidade', 0),
+(58, 2, 'Constituição', 0),
+(59, 2, 'Charme', 0),
+(60, 2, 'Sorte', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `stts`
 --
 
 CREATE TABLE `stts` (
   `cd_stt` int(11) NOT NULL,
   `nm_stt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `id_stt` int(11) NOT NULL,
+  `id_stt_user` int(11) NOT NULL,
   `vl_stt` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -173,7 +220,7 @@ CREATE TABLE `stts` (
 -- Extraindo dados da tabela `stts`
 --
 
-INSERT INTO `stts` (`cd_stt`, `nm_stt`, `id_stt`, `vl_stt`) VALUES
+INSERT INTO `stts` (`cd_stt`, `nm_stt`, `id_stt_user`, `vl_stt`) VALUES
 (1, 'Inteligência', 1, 5),
 (2, 'Força', 1, 0),
 (3, 'Agilidade', 1, 0),
@@ -239,6 +286,18 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`cd_role`);
 
 --
+-- Índices para tabela `sheet`
+--
+ALTER TABLE `sheet`
+  ADD PRIMARY KEY (`cd_sheet`);
+
+--
+-- Índices para tabela `steet`
+--
+ALTER TABLE `steet`
+  ADD PRIMARY KEY (`cd_stt_sheet`);
+
+--
 -- Índices para tabela `stts`
 --
 ALTER TABLE `stts`
@@ -283,6 +342,18 @@ ALTER TABLE `itens`
 --
 ALTER TABLE `roles`
   MODIFY `cd_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de tabela `sheet`
+--
+ALTER TABLE `sheet`
+  MODIFY `cd_sheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `steet`
+--
+ALTER TABLE `steet`
+  MODIFY `cd_stt_sheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de tabela `stts`

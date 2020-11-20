@@ -42,7 +42,7 @@
         if ($result = $mysqli->query($query)){
             while ($obj = $result->fetch_object()){
     	        printf ("<div class='col-lg-3 col-sm-4'>
-                         <a href='item.php?cod=%s'><img class='card-img-top' src='%s' alt='Card image cap'></a>
+                         <a href='ability.php?cod=%s'><img class='card-img-top' src='%s' alt='Card image cap'></a>
                          <h4 class='card-title'>%s</h4>
 		                 <p class='card-text'>".$name[$index]."</p>
                          </div>", $obj->cd_ab, $obj->img_ab, $obj->nm_ab);

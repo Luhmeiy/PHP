@@ -10,10 +10,7 @@ include "default/conec2.php";
 <head>
     <title>Dashboard</title>
 <!-- Início dos links externos -->
-<?php
-    include "default/bootstrap.php";
-?>
-<link rel="stylesheet" type="text/css" href="CSS/css.css">
+<?php include "default/bootstrap.php"; ?>
 <!-- Fim dos links externos -->
 </head>
 <body>
@@ -42,6 +39,14 @@ include "default/conec2.php";
 </div>
 </div>
 <style type="text/css">
+.container {
+    display: table;
+    height: 100vh;
+}
+.row {
+    vertical-align: middle;
+    display: table-cell;
+}
 .col-md-10{
     background-color: lightgray;
     padding-top: 5%;
