@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 16-Nov-2020 às 00:35
+-- Tempo de geração: 21-Nov-2020 às 04:10
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.3.23
 
@@ -37,24 +37,6 @@ CREATE TABLE `cart` (
   `qnt_cart` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `cart`
---
-
-INSERT INTO `cart` (`cd_cart`, `prod`, `cart_user`, `qnt_cart`) VALUES
-(1, 28, 49, 2),
-(57, 30, 13, 2),
-(59, 1, 43, 6),
-(62, 2, 43, 2),
-(64, 3, 43, 17),
-(87, 2, 49, 2),
-(90, 1, 13, 2),
-(94, 2, 44, 1),
-(95, 1, 44, 3),
-(98, 3, 52, 1),
-(99, 4, 43, 8),
-(100, 7, 52, 3),
-(101, 2, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -69,13 +51,6 @@ CREATE TABLE `comment` (
   `avaliacao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `comment`
---
-
-INSERT INTO `comment` (`cd_com`, `desc_com`, `id_user`, `avaliacao`) VALUES
-(1, 'Produto legal', 1, 20),
-(2, 'Muito legal', 1, 40);
 
 -- --------------------------------------------------------
 
@@ -92,60 +67,11 @@ CREATE TABLE `comprados` (
   `qnt_compra_com` int(11) NOT NULL,
   `endereço` varchar(255) NOT NULL,
   `endereco_num` int(11) NOT NULL,
-  `cod_compra` int(11) NOT NULL
+  `cod_compra` int(11) NOT NULL,
+  `id_user_com` int(11) NOT NULL,
+  `data` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `comprados`
---
-
-INSERT INTO `comprados` (`cd_compra`, `nome`, `telefone`, `comment`, `id_prod_com`, `qnt_compra_com`, `endereço`, `endereco_num`, `cod_compra`) VALUES
-(1, 'Jucelino', '99999', 'Tira o picles', 1, 2, 'Rua Sua Mãe', 123, 1),
-(2, 'Jucelina', '99999', 'Coloca mais picles', 28, 1, 'Rua Seu Pai', 123, 0),
-(3, 'asas', 'asdas', 'sbnkjbscdfhjbashkdbiabs', 19, 2, '1', 0, 0),
-(4, 'Adega', '22334457', 'Tira o marcador de página, pfv.', 15, 3, 'Cuba', 427, 0),
-(5, 'Jucelino', '99999', 'Tira o picles', 5, 10, 'Rua Sua Mãe', 123, 1),
-(6, 'Jucelino', '99999', 'Tira o picles', 12, 2, 'Rua Sua Mãe', 123, 1),
-(7, 'Jucelino', '99999', 'Tira o picles', 3, 2, 'Rua Sua Mãe', 123, 1),
-(8, 'Jucelino', '99999', 'Tira o picles', 9, 2, 'Rua Sua Mãe', 123, 1),
-(9, 'Jucelino', '99999', 'Tira o picles', 10, 2, 'Rua Sua Mãe', 123, 1),
-(10, 'Jucelino', '99999', 'Tira o picles', 16, 2, 'Rua Sua Mãe', 123, 1),
-(11, 'Jucelino', '99999', 'Tira o picles', 20, 2, 'Rua Sua Mãe', 123, 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `contact`
---
-
-CREATE TABLE `contact` (
-  `msg_id` int(255) NOT NULL,
-  `user_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `user_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `msg_text` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `email`
---
-
-CREATE TABLE `email` (
-  `cd_mail` int(11) NOT NULL,
-  `nm_mail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `telefone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `mensagem` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `email`
---
-
-INSERT INTO `email` (`cd_mail`, `nm_mail`, `email`, `telefone`, `mensagem`) VALUES
-(5, 'Luiz Henrique Santos', 'Medeiros.luizhenrique@yahoo.co', '13981343264', 'asssssssssssss'),
-(6, 'Luiz Henrique Santos', 'Medeiros.luizhenrique@yahoo.co', '13981343264', 'asssssssssssss');
 
 -- --------------------------------------------------------
 
@@ -231,31 +157,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `user`
---
-
-INSERT INTO `user` (`cd_user`, `email`, `nm_user`, `senha`) VALUES
-(1, 'blablabla@gmail.com', 'Bla', 'Blabla1'),
-(3, 'a@gmail.com', '0cc175b9c0f1b6a831c399e269772661', '0cc175b9c0f1b6a831c399e269772661'),
-(4, 'a@a', 'aa', 'aa'),
-(6, '0ab51dba31f34dfef13fbb64af750eaf', '79af87723dc295f95bdb277a61189a2a', '79af87723dc295f95bdb277a61189a2a'),
-(7, 'b51c01ae3849dba83efee52298cfe582', 'd9d7dbddc29177b121a6aa1bb09d15fd', 'd9d7dbddc29177b121a6aa1bb09d15fd'),
-(8, '66f4dee099469e7d079f78b2fd818494', 'fe8432b9c18e6b9ce36aa1a222cab401', 'fe8432b9c18e6b9ce36aa1a222cab401'),
-(9, '8555ad1cfb30c2d6182feccc9048304b', '47bce5c74f589f4867dbd57e9ca9f808', '47bce5c74f589f4867dbd57e9ca9f808'),
-(13, 'Barrica123@gmail.com', 'Barrica123', 'd537e0a5a0bc07e8c2f0f0b0a178de0b'),
-(43, 'Medeiros.luizhenrique@yahoo.com.br', 'Luiz Henrique Medeiros dos Santos', '0617e46a8c4fe3d5aa0b211de9a2357d'),
-(44, 'kenzosuzuki0306@gmail.com', '鈴木', 'b9f53df120b80d59db999023f7fc4c3b'),
-(48, 'a@aa', 'aaa', 'd41d8cd98f00b204e9800998ecf8427e'),
-(49, 'negociocelso@gmail.com', 'Celso Negocio', '253a81d5cdfde8e06b8e9419acf95835'),
-(50, 'penispenis@e', 'cc', 'd41d8cd98f00b204e9800998ecf8427e'),
-(51, 'cesar.barrichello@hotmail.com', 'xdxd', 'd41d8cd98f00b204e9800998ecf8427e'),
-(52, 'cesar.barrichello123@gmail.com', 'AguiaBranca Br', '93a0972c4cc0eec5966540be68cff40e'),
-(53, 'celso@celso', 'ceruso', 'd41d8cd98f00b204e9800998ecf8427e'),
-(54, 'aaaa@a', 'aaaa', 'd41d8cd98f00b204e9800998ecf8427e'),
-(55, 'aaaaa@a', 'aaaa', 'd41d8cd98f00b204e9800998ecf8427e'),
-(56, '4@4', '4', 'd41d8cd98f00b204e9800998ecf8427e');
-
---
 -- Índices para tabelas despejadas
 --
 
@@ -317,7 +218,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de tabela `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cd_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `cd_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de tabela `comment`
@@ -329,7 +230,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT de tabela `comprados`
 --
 ALTER TABLE `comprados`
-  MODIFY `cd_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `cd_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `contact`
@@ -359,7 +260,7 @@ ALTER TABLE `stt`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `cd_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `cd_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Restrições para despejos de tabelas
