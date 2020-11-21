@@ -32,7 +32,7 @@ include "default/conecta.php";
     }
     else if ($_GET['al'] == 3){//a página só será exibida se quem a estiver utilizando for o admin
         echo "<center><h1> Compra concluída com sucesso! </h1><br> Retorne para o <a href='index.php'>site</a></center>";
-        echo "<meta http-equiv='refresh' content='5; URL=index.php'>";
+        echo "<meta http-equiv='refresh' content='5; URL=history.php'>";
     }
     else{
         echo "<center><h1> Você não deveria estar aqui! </h1><br> Retorne para o <a href='index.php'>site</a></center>";

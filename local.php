@@ -16,9 +16,7 @@ include "default/conecta.php";
 </head>
 <body>
 <!-- Início do header -->
-<?php
-include 'default/header.php';
-?>
+<?php include 'default/header.php'; ?>
 <!-- Fim do header -->
 <!-- Contate-nos e Google Maps -->
 <center><div class="row" style="padding-top: 3%; padding-bottom: 3%; background-color: orange;">
@@ -51,9 +49,7 @@ include 'default/header.php';
 </div></center>
 <!-- Fim do Google Maps e contate-nos -->
 <!-- Início do footer -->
-<?php
-include "default/footer.php";
-?>
+<?php include "default/footer.php"; ?>
 <!-- Fim do footer -->
 <style>
 #img{

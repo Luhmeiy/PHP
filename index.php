@@ -82,36 +82,6 @@ include "default/conecta.php";
         </div></center>
     </div>
     <!-- Fim do carrossel externo -->
-    <!-- Início do carrossel interno -->
-	<div class="col-xs-12 justify-content-center">
-        <center><div id="carousel" class="carousel slide my-4" data-ride="carousel" style="width: 100vw;">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators,#carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators,#carousel" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators,#carousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img class="d-block img-fluid" src="http://placehold.it/1500x350" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block img-fluid" src="http://placehold.it/1500x350" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block img-fluid" src="http://placehold.it/1500x350" alt="Third slide">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators,#carousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators,#carousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div></center>
-    </div>
-    <!-- Fim do carrossel interno -->
 </section>
 <div class="container">
     <!-- Início do Carousel -->
@@ -139,7 +109,7 @@ include "default/conecta.php";
         <div class="col-md-10">
             <div class="contact" id="contact">
                 <h1 style="color: #ED421C;">Contate-nos</h1>
-                <form action="post">
+                <form method="POST">
                     <input class="form-control" type="text" style="margin-bottom: 10px;" name="name" placeholder="Nome">
                     <input class="form-control" type="text" style="margin-bottom: 10px;" name="email" placeholder="Email">
                     <input class="form-control" type="text" style="margin-bottom: 10px;" name="coment" placeholder="Mensagem">
@@ -155,9 +125,7 @@ include "default/conecta.php";
 
 <!-- Fim do Google Maps e contate-nos -->
 <!-- Início do footer -->
-<?php
-include "default/footer.php";
-?>
+<?php include "default/footer.php"; ?>
 <!-- Fim do footer -->
 <style type="text/css">
 .btno {
@@ -184,29 +152,55 @@ window.addEventListener("scroll", function(){
     list.classList.toggle("hidden", window.scrollY > 1);
 });
 </script>
-    <?php
-    $nomecon = $_POST('name');
-    $emailcon = $_POST('email');
-    $msgcon = $_POST('coment');
-    // emails para quem será enviado o formulário
+<?php
+if (isset($_POST['car'])) {
+// Corpo do Email
+$arquivo = "
+<style type='text/css'>
+body {
+    margin:0px;
+    font-size: 20px;
+}
+* {
+    font-family: 'Lato', sans-serif;
+}
+#gray{
+    color: #666666;
+}
+table{
+    text-align: center;
+}
+</style>
+<html>
+<center><table style='width: 510px;'>
+    <tr>
+        <td colspan='6'>
+            ".$_POST['name']."<br>
+            ".$_POST['email']."
+        </td>
+        <td colspan='6'>
+            ".$_POST['coment']."
+        </td>
+    </tr>
+</table></center>
+</html>";
+echo $arquivo1;
+//enviar
+// emails para quem será enviado o formulário
     $emailenviar = "medeiros.luizhenrique@yahoo.com.br";
     $destino = $emailenviar;
     $assunto = "Contato pelo Site";
-    $arquivo = $msgcon;
     // É necessário indicar que o formato do e-mail é html
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-    $headers .= 'From: '.$nomecon.' <$email>';
+    $headers .= 'From: '.$nome.' <$email>';
     //$headers .= "Bcc: $EmailPadrao\r\n";
     $enviaremail = mail($destino, $assunto, $arquivo, $headers);
-    if($enviaremail)
-    {
-        echo "E-MAIL ENVIADO COM SUCESSO! <br> O link será enviado para o e-mail fornecido no formulário";
-        echo $arquivo;
-    } else 
-    {
+    if($enviaremail){
+    } else {
         echo "ERRO AO ENVIAR E-MAIL!";
     }
-    ?>
+}
+?>
 </body>
 </html>

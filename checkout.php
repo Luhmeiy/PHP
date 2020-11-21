@@ -25,22 +25,21 @@ include "default/conecta.php";
 <body style="background-color: #292929; overflow-y: none;" id="scroll2">
 <?php
 if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
-    $query = "SELECT * FROM compra, cart"; //seleciona tudo das tabelas compra e carrinho
-    if ($result = $mysqli->query($query)) {
-    while ($obj = $result->fetch_object()) {
-        $sql = "INSERT INTO compra (cd_compra, nome, telefone, endereço, endereco_num, comment, id_prod_com, qnt_compra_com) VALUES (NULL, '".$_POST['nome']."', '".$_POST['phone']."', '".$_POST['rua']."', '".$_POST['number']."', '".$_POST['review']."', '".$obj->prod."', '".$obj->qnt_cart."')"; //insere as variáveis POST na tabela compra
-        $sql = "DELETE FROM cart WHERE user = '".$_SESSION['COD_USER']."'"; //remove tudo do carrinho se o código de usuário na tabela carrinho for igual a sessão
+    $cod = $_POST['id'];
+    $qnt = $_POST['qnt'];
+    $data = date("Y/m/d");
+    foreach ($cod as $index => $code) {
+        echo $_POST['nome'].", ".$_POST['phone'].",".$_POST['review'].", ".$code.", ".$qnt[$index].", ".$_POST['rua'].", ".$_POST['number'].", ".$_POST['hidden'];
+        $query = "INSERT INTO comprados (cd_compra, nome, telefone, comment, id_prod_com, qnt_compra_com, endereço, endereco_num, cod_compra, id_user_com, data) VALUES (NULL, '".$_POST['nome']."', '".$_POST['phone']."','".$_POST['review']."', ".$code.", '".$qnt[$index]."', '".$_POST['rua']."', '".$_POST['number']."', '".$_SESSION['cod_com']."', '".$_SESSION['COD_USER']."', '".$data."')"; //insere as variáveis POST na tabela compra
+        if ($result = $mysqli->query($query)) {
+        }
     }
-    header('location:index.php'); //redireciona o usuário
-    }
-	if ($conn->query($sql) === TRUE) {
-	}
-    else{
-  		echo $conn->error;
-	}
+    
+    header('location:delete.php'); //redireciona o usuário
 }
 ?>
 <!-- Início do form de checkout -->
+<form method="POST" style="width: 100%;">
 <div class="content" id="content" style="margin-top: 5%;">
 <div class="row" style="align-items: center; justify-content: center; ">
 	<div class="col-md-11" style="background-color: white;">
@@ -49,9 +48,10 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
             <div class="col-md-6">
 				<h1><b>Seus Itens</b></h1>
 				<div class="row justify-content-left" style="height: 350px;">
-					<div class="col-md-12" id="scroll" style="margin-left: 1%;">
+					<div class="col-md-12">
+					<div class="col-md-12" id="scroll" >
                     <?php
-                        $query = "SELECT * FROM shop, cart WHERE cd_shop = prod  AND user = '".$_SESSION['COD_USER']."'"; //seleciona tudo das tabelas shop e cart
+                        $query = "SELECT * FROM shopin, cart WHERE cd_shop = prod  AND cart_user = '".$_SESSION['COD_USER']."'"; //seleciona tudo das tabelas shop e cart
                         if ($result = $mysqli->query($query)) {
                         while ($obj = $result->fetch_object()) {
                             $sub = $obj->vl_shop * $obj->qnt_cart;
@@ -70,6 +70,8 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
                                     <div class='col-md-2'>
                                     <div class='card-body'>
                                     <h5 class='card-title'><b>%s</b></h5>
+                                    <input type='hidden' value='%s' name='qnt[]'>
+                                    <input type='hidden' value='%s' name='id[]'>
                                     </div>
                                     </div>
                                     <div class='col-md-3' style='padding-right: 5px;'>
@@ -80,16 +82,16 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
                                     </div>
                                     </div>
                                     </div>
-                                    </a>", $obj->cd_shop, $obj->img_shop, $obj->nm_shop, $obj->qnt_cart);
+                                    </a>", $obj->cd_shop, $obj->img_shop, $obj->nm_shop, $obj->qnt_cart, $obj->qnt_cart, $obj->cd_shop);
                         }
-                        $result->close();
                         }
                     ?>
 					</div>
+					</div>
 				</div>
 			</div>
-            <!-- Form para o usuário colocar sua localização e forma de pagamento -->
-            <form method="POST">
+			<div class="col-md-6">
+            <!-- Form para o usuário colocar sua localização -->
 				<h1><b>Checkout</b></h1>
 				<h4><p style="color: gray;">Detalhes de Envio</p></h4>
 				<div class="row">
@@ -106,13 +108,22 @@ if (isset($_POST['checkout'])) { //verifica se o POST está preenchido
                     <textarea class="form-control" id="review" name="review" rows="4" cols="50" style="resize:none; width: 95%; margin-bottom: 1%;" placeholder="Adicione algum comentário quanto ao pedido (opcional)"></textarea>
                 </div>
 				<div class="row justify-content-center">
-        		  <input type="submit" id="checkout" name="checkout" class="btno btn-success checkout" value="Finalizar Compra" style="width: 50%;">
+        		    <input type="submit" id="checkout" name="checkout" class="btno btn-success checkout" value="Finalizar Compra" style="width: 50%;">
+        		    <?php 
+        		        $query = "SELECT * FROM comprados ORDER BY cod_compra DESC LIMIT 1"; //seleciona tudo das tabelas compra e carrinho
+                        if ($result = $mysqli->query($query)) {
+                            while ($obj = $result->fetch_object()) {
+                                $_SESSION['cod_com'] = $obj->cod_compra + 1;
+                            }
+                        }
+        		    ?>
 				</div>
-            </form>
+			</div>
 		</div>
 	</div>
 </div>
 </div>
+</form>
 <!-- Fim do form de checkout -->
 <style type="text/css">
 	@media screen and (min-width: 1050px) {
@@ -139,16 +150,14 @@ input {
 	width: 100%;
 	min-width: 100%;
 }
-div#scroll { 
+#scroll { 
     margin:4px, 4px; 
     padding:4px;  
-    width: 500px; 
-    height: 61.5vh; 
-    overflow-x: hidden; 
-    overflow-x: auto;
-    overflow-x: hidden; 
-    overflow-x: none;
-    text-align:justify; 
+    width: auto;
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: justify; 
 }
 #scroll2{ 
     overflow-x: hidden; 
@@ -161,6 +170,14 @@ div#scroll {
 }
 ::-webkit-scrollbar-thumb {
     background: rgb(91,192,222);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
 </style>
 </body>

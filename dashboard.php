@@ -2,7 +2,7 @@
 <?php
 session_start();
 include "default/conecta.php";
-if ($_SESSION['COD_USER'] == 43){//verifica se é o admin que está logado
+if ($_SESSION['COD_USER'] == 53 || $_SESSION['COD_USER'] == 43){//verifica se é o admin que está logado
 ?>
 <html style="overflow-y: hidden;">
 <meta charset="utf-8">
@@ -80,81 +80,39 @@ include 'default/header.php';
     </div>
     </div>
     <div class="row">
-    <?php
-        $id = $_POST['id'];
-        $qnt = $_POST['qnt'];
-        foreach ($id as $v => $code) {
-            if ($result = $mysqli->query("SELECT * FROM cart WHERE cart_user = '".$_SESSION['COD_USER']."'")) {
-                $row_cnt = $result->num_rows;
-                if ($row_cnt == 0) {
-                    echo "CCCCCCCCCCCCC"; 
-                }
-                else {
-                    $query = "UPDATE cart SET qnt_cart = '".$qnt[$v]."' WHERE prod = '".$code."' AND cart_user = '".$_SESSION['COD_USER']."'"; //verifica se os dados do login conferem
-                    if ($result = $mysqli->query($query)){
-                    }
-                }
-            }
-            else {
-                echo "BBBBBBBBBBBBBBBBB".$_POST['qnt'];
-            }
-        }
-        $query = "SELECT * FROM comprados, shopin WHERE cd_shop = id_prod_com GROUP BY id_prod_com ASC"; //verifica se os dados do login conferem
-        if ($result = $mysqli->query($query)){
-            while ($obj = $result->fetch_object()){
-                $cd[] = $obj->cd_shop;
-                $qnt[] = $obj->qnt_compra_com;
-            }
-            foreach ($cd as $v => $code) {   
-                echo "array('x'=> '".$code."', 'y'=> '".$qnt[$v]."'),";
-            }
-        }
-        $array[1] = array("x"=> 10, "y"=> 51);
-        $array[2] = array("x"=> 20, "y"=> 35);
-        $dataPoints = array(
-    	    $array[1],
-	        $array[2],
-	        array("x"=> 30, "y"=> 50),
-	        array("x"=> 40, "y"=> 45),
-	        array("x"=> 50, "y"=> 52),
-	        array("x"=> 60, "y"=> 68),
-	        array("x"=> 70, "y"=> 38),
-	        array("x"=> 80, "y"=> 71),
-	        array("x"=> 90, "y"=> 52),
-	        array("x"=> 100, "y"=> 60),
-	        array("x"=> 110, "y"=> 36),
-	        array("x"=> 120, "y"=> 49),
-	        array("x"=> 130, "y"=> 41)
-	   );
-    ?>
-    <script>
-    window.onload = function () {   
-    var chart = new CanvasJS.Chart("chartContainer", {
-	    animationEnabled: true,
-	    exportEnabled: true,
-	    theme: "light1", // "light1", "light2", "dark1", "dark2"
-	    title:{
-		    text: "Gráfico Foda"
-	    },
-	    axisY:{
-		    includeZero: true
-	    },
-	    data: [{
-		    type: "column", //change type to bar, line, area, pie, etc
-		    //indexLabel: "{y}", //Shows y value on all Data Points
-		    indexLabelFontColor: "#5A5757",
-		    indexLabelPlacement: "outside",   
-		    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-	    }]
-    });
-    chart.render();
-    }
-    </script>
-    <div id="chartContainer" style="height: 500px; width: 100%; float: bottom;"></div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <?php  
+        $connect = mysqli_connect("localhost", "id14991490_root", "PN0/}bRmeQwG+\bq", "id14991490_tcc"); 
+        $query = "SELECT *, SUM(qnt_compra_com) as number FROM comprados, shopin WHERE cd_shop = id_prod_com GROUP BY id_prod_com ORDER BY qnt_compra_com DESC LIMIT 10";  
+        $result = mysqli_query($connect, $query);  
+    ?>   
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+    <script type="text/javascript">  
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);  
+        function drawChart() {  
+            var data = google.visualization.arrayToDataTable([  
+                ['nm_shop', 'Number'],  
+                <?php  
+                    while($row = mysqli_fetch_array($result)) {  
+                        echo "['".$row["nm_shop"]."', ".$row["number"]."],";  
+                    }  
+                ?>  
+            ]);  
+            var options = {  
+                title: 'Porcentagem de Produtos Vendidos',  
+                //is3D:true,  
+                pieHole: 0.4  
+            };  
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+            chart.draw(data, options);  
+        }  
+    </script>   
+    <div style="width:810px;">  
+        <div id="piechart" style="width: 810px; height: 500px;"></div>  
+    </div>  
     </div>
-    </div>
-    <div class="col-md-4" id="scroll" style="padding-right: 50px; height: 665px;">
+</div>
+<div class="col-md-4" id="scroll" style="padding-right: 50px; height: 665px;">
     <?php
         $query = "SELECT * FROM comprados, shopin WHERE id_prod_com = cd_shop";
         if ($result = $mysqli->query($query)) {

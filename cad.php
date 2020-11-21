@@ -2,8 +2,6 @@
 <?php
 session_start();
 include "default/conecta.php";
-$senha = ''; //previne que a variável $senha seja dada como indefinida
-$senha1 = ''; //previne que a variável $senha1 seja dada como indefinida
 ?>
 <html>
 <meta charset="utf-8">
@@ -23,17 +21,18 @@ $senha1 = ''; //previne que a variável $senha1 seja dada como indefinida
 <body>
 <?php
 if (isset($_POST['user'])){ //verifica se a variável foi definida
-    $senha = md5($_GET['id']); //criptografa a senha utilizando md5
-    $senha1 = md5($_POST['senha1']);
+    $senha = md5($_POST['senha']); //criptografa a senha utilizando md5
+    echo "QAAAAAAAAAAAAAAAA";
     if ($result = $mysqli->query("SELECT * FROM user WHERE email = '".$_POST['email']."'")) {
         /* determine number of rows result set */
         $row_cnt = $result->num_rows;
+        echo $row_cnt;
         if ($row_cnt == 0) {
-            $query = "INSERT INTO user (cd_user, email, nm_user, senha) VALUES (NULL,'".$_POST['email']."', '".$_POST['user']."','".$senha."')";
+            $query = "INSERT INTO user (cd_user, email, nm_user, senha) VALUES (NULL,'".$_POST['email']."', '".$_POST['user']."', '".$senha."')";
             if ($result = $mysqli->query($query)){
-            while ($obj = $result->fetch_object()){
-                header("location:alert.php?al=1"); //redireciona o usuário
-        	}
+                while ($obj = $result->fetch_object()){
+                    header("location:alert.php?al=1",true); //redireciona o usuário
+        	    }
         	}
         }
         else{
@@ -41,12 +40,11 @@ if (isset($_POST['user'])){ //verifica se a variável foi definida
         }
     }
 }
-$mysqli->close();
 ?>
 <center style="margin-top: 30vh;">
 <h1><b>Cadastro</b></h1>
 <!-- Início do form de cadastro -->
-<form action="" method="post" style="width: 280px;">
+<form method="POST" style="width: 280px;">
 	<div class="form-group">
 		<input type="email" class="form-control" placeholder="Email" name="email" required="required">
 	</div>

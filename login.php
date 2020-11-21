@@ -2,7 +2,6 @@
 <?php
 session_start();
 include "default/conecta.php";
-$senha = ''; //previne que a variável $senha seja dada como indefinida
 ?>
 <html>
 <meta charset="utf-8">
@@ -26,15 +25,14 @@ $senha = ''; //previne que a variável $senha seja dada como indefinida
 <?php
 if (isset($_POST['login'])) { //verifica se a variável foi definida
     $senha = md5($_POST['senha']); //criptografa a senha utilizando md5
-    $conn = "SELECT * FROM user WHERE nm_user = ".$_POST['login']." AND senha = ".$senha." OR email = ".$_POST['login']." AND senha = ".$senha.""; //verifica se os dados do login conferem
-    if ($result = $mysqli->query($conn)){
+    $sql = "SELECT * FROM user WHERE nm_user = '".$_POST['login']."' AND senha = '".$senha."' OR email = '".$_POST['login']."' AND senha = '".$senha."'";
+    if ($result = $mysqli->query($sql)){
         while ($obj = $result->fetch_object()){
             $_SESSION['COD_USER'] = $obj->cd_user; //adiciona o código de usuário na sessão
-            header("location:index.php?al=2"); //redireciona o usuário
+            header("location:alert.php?al=2"); //redireciona o usuário
         }
     }
 }
-$conn->close();
 ?>
 <center style="margin-top: 30vh;">
 <h1><b>Login</b></h1>
