@@ -1,7 +1,7 @@
 $(document).ready(function() {
     /* Set rates + misc */
     var taxRate = 0.05;
-    var shippingRate = 15.00; 
+    var shippingRate = 5.00; 
     var fadeTime = 300;
     /* Assign actions */
     $('.product-quantity input').change( function() {
@@ -12,7 +12,6 @@ $(document).ready(function() {
     });
     /* Recalculate cart */
     function recalculateCart() {
-        var subtotal = 0;
         /* Sum up row totals */
         $('.product').each(function () {
             subtotal += parseFloat($(this).children('.product-line-price').text());
