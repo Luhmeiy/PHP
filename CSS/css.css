@@ -35,7 +35,7 @@ header {
 header.sticky {
     height: 50px;
     padding: 5px 10px;
-    background: #fff;
+    background: #FFA500;;
     border-bottom: 1px solid (0,0,0,1);
 }
 header .logo, header .logo1 {
