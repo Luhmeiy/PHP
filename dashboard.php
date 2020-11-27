@@ -2,7 +2,7 @@
 <?php
 session_start();
 include "default/conecta.php";
-if ($_SESSION['COD_USER'] == 53 || $_SESSION['COD_USER'] == 43){//verifica se é o admin que está logado
+if ($_SESSION['COD_USER'] == 43){//verifica se é o admin que está logado
 ?>
 <html style="overflow-y: hidden;">
 <meta charset="utf-8">
@@ -29,6 +29,13 @@ include 'default/header.php';
     <div class="col-md-4">
     <div class="row">
         <div class="col-md-1"></div>
+        <div class="col-md-10" style="background-color: black; color: white;">
+            <center><h3>Unidades Vendidas</h3></center>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
         <div class="col-md-10">
         <?php
             $query = "SELECT SUM(qnt_compra_com) AS comprados FROM comprados";
@@ -44,6 +51,13 @@ include 'default/header.php';
     </div>
     </div>
     <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background-color: black; color: white;">
+            <center><h3>Total Bruto</h3></center>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
@@ -62,6 +76,13 @@ include 'default/header.php';
     </div>   
     </div>
     <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background-color: black; color: white;">
+            <center><h3>Produto Mais Vendido</h3></center>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">

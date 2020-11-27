@@ -39,9 +39,9 @@ if (isset($_POST['car'])){
 }
 ?>
 <!-- Início do header -->
-<header id="header" class="sticky" style="position: relative;">
+<header id="header" class="sticky" style="position: relative; width: 100%; background-color: #FFA500;">
 <a href="index.php" class="logo">Barrica's Bar</a>
-<a href="car.php" style="color: black;">Carrinho</a>
+<a href="car.php" style="color: black;"><i class="fa fa-shopping-cart" style="font-size:40px;"></i></a>
 </header>
 <!-- Fim do header -->
 <div class="container" style="margin-top: 2%;">

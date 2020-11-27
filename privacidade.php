@@ -26,7 +26,7 @@ include 'default/header.php';
 <div class="container">
 <center><div class="row justify-content-center" id="col4">
 	<div class="col-md-12">
-		<h1>Termos de Uso</h1>
+		<h1>Política de Privacidade</h1>
 	</div>
 	<hr id="hr">
 </div></center>

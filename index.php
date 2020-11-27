@@ -26,14 +26,24 @@ include "default/conecta.php";
 <!-- Início do header -->
 <header id="header" style="overflow-x: hidden;">
 <!-- Início do header interno -->
-<header class="navbar navbar-light flex-column flex-md-row bd-navbar sticky atx hidden" style="overflow-x: hidden;">
+<header class="navbar navbar-light flex-column flex-md-row bd-navbar sticky atx hidden" style="overflow-x: hidden; background-color: #FFA500;">
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="" id="content">
             <a href="loja.php" id="tudo">Produtos</a>
             <a href="sobre.php" id="tudo">Sobre Nós</a>
             <a href="local.php" id="tudo">Local</a>
-            <a href="login.php" id="tudo">Conta</a>
+            <?php
+                if (isset($_SESSION['COD_USER'])) {
+                    echo "<a href='history.php' id='tudo'>Histórico de Compras</a>";
+                }
+                else {
+                    echo "<a href='login.php' id='tudo'>Conta</a>";
+                }
+                if ($_SESSION['COD_USER'] == 43) { 
+                    echo "<a href='dashboard.php' id='tudo'>Dashboard</a>";
+                }
+            ?>
         </div>
     </div>
     <button class="navbar-toggler collapsed mySidenav" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav();">
@@ -58,7 +68,17 @@ include "default/conecta.php";
     <p><a href="sobre.php" style="color: white;">Sobre nós</a></p>
     <p><a href="local.php" style="color: white;">Local</a></p>
     <p><a href="#contact" style="color: white;">Contato</a></p>
-  <p><a href="login.php" style="color: white;">Conta</a></p>
+    <?php 
+        if (isset($_SESSION['COD_USER'])) {
+            echo "<p><a href='history.php' style='color: white;'>Histórico de Compras</a></p>";
+        }
+        else {
+            echo "<p><a href='login.php' style='color: white;'>Conta</a></p>";
+        }
+        if ($_SESSION['COD_USER'] == 43) { 
+            echo "<p><a href='dashboard.php' style='color: white;'>Dashboard</a></p>";
+        }
+    ?>
     </h4></center>
 </div>
 </div>

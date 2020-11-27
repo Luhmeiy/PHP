@@ -35,7 +35,7 @@ if (empty($_SESSION['COD_USER'])) { //se a sessÃ£o estiver vazia, define a sessÃ
             if ($result = $mysqli->query("SELECT * FROM cart WHERE cart_user = '".$_SESSION['COD_USER']."'")) {
                 $row_cnt = $result->num_rows;
                 if ($row_cnt == 0) {
-                    echo "CCCCCCCCCCCCC"; 
+                    
                 }
                 else {
                     $query = "UPDATE cart SET qnt_cart = '".$qnt[$v]."' WHERE prod = '".$code."' AND cart_user = '".$_SESSION['COD_USER']."'"; //verifica se os dados do login conferem
@@ -44,7 +44,7 @@ if (empty($_SESSION['COD_USER'])) { //se a sessÃ£o estiver vazia, define a sessÃ
                 }
             }
             else {
-                echo "BBBBBBBBBBBBBBBBB".$_POST['qnt'];
+                
             }
         }
     }
@@ -64,11 +64,7 @@ else{
     echo $conn->error;
 }
 ?>
-<hr>
-<br>
-<br>
-<h1 style="margin-left: 1%;">Carrinho de Compras</h1>
-<br>
+<h1 style="margin-left: 1%; margin-top: 10px; margin-bottom: 10px;">Carrinho de Compras</h1>
 <!-- InÃ­cio do form do carrinho -->
 <form method="POST">
 <div style="margin-right: 1%; margin-left: 1%;">
