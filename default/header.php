@@ -10,10 +10,15 @@ include "bootstrap.php";
             <a href="loja.php" id="tudo">Produtos</a>
             <a href="sobre.php" id="tudo">Sobre Nós</a>
             <a href="local.php" id="tudo">Local</a>
-            <a href="login.php" id="tudo">Conta</a>
             <?php 
+                if (isset($_SESSION['COD_USER'])) {
+                    echo "<a href='history.php' id='tudo'>Histórico de Compras</a>";
+                }
+                else {
+                    echo "<a href='login.php' id='tudo'>Conta</a>";
+                }
                 if ($_SESSION['COD_USER'] == 43) { 
-                    echo "<a href='dashboard3.php' id='tudo'>Dashboard</a>";
+                    echo "<a href='dashboard.php' id='tudo'>Dashboard</a>";
                 }
             ?>
         </div>
